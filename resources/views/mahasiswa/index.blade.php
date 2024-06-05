@@ -33,7 +33,7 @@
   
                 <div class="card-tools">
                 <div class="card-tools">
-                <a href="tambahmahasiswa.php" class="btn btn-primary">Tambah</a>
+                <a href="/mahasiswa/create" class="btn btn-primary">Tambah</a>
                   </div>
                 </div>
               </div>

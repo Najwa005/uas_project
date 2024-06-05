@@ -32,7 +32,7 @@
                 <h3 class="card-title">Data Program Studi</h3>
   
                <div class="card-tools">
-                <a href="tambahprodi.php" class="btn btn-primary">Tambah</a>
+                <a href="/prodi/create" class="btn btn-primary">Tambah</a>
                </div>
               </div>
               <!-- /.card-header -->
@@ -50,11 +50,15 @@
                     @foreach ($prodi as $p)
                         <tr>
                           <td>{{ $loop->iteration }}</td>
-                          <td>{{ $p->id_prodi }}</td>
                           <td>{{ $p->nama_prodi }}</td>
                           <td>
-                            <a href="" class="btn btn-warning">Edit</a>
-                            <a href="" class="btn btn-danger">Hapus</a>
+                            <a href="{{ url ("prodi/$p->id/edit") }}" 
+                              class="btn btn-warning">Edit</a>
+                            <form action="{{ url("prodi/$p->id") }}" method="post" claSS="d-inline">
+                              @method('delete')
+                              @csrf
+                                <button class="btn btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapusnya?')">Hapus</button>
+                            </form>
                           </td>
                         </tr>
                     @endforeach
