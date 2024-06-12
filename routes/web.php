@@ -16,12 +16,6 @@ Route::get('welcome', function () {
 //    return view('mahasiswa', ['nama' => "Najwa Fitriyani", 'foto' =>'najwa.jpg']);
 // });
 
-// Route::get('/mahasiswa', 'App\Http\Controllers\mahasiswacontroller@index');
-Route::get('/mahasiswa', [mahasiswacontroller::class, 'index']);
-Route::get('/mahasiswa/{id}', [mahasiswacontroller::class, 'show']);
-Route::get('/mahasiswa/create', [mahasiswacontroller::class, 'create']);
-Route::post('/mahasiswa', [mahasiswacontroller::class, 'store']);
-
 // Route::get('/prodi', function () {
 //    return view('prodi', ['nama' => "Najwa Fitriyani", 'foto' =>'najwa.jpg']);
 // });
@@ -32,3 +26,11 @@ Route::post('/mahasiswa', [mahasiswacontroller::class, 'store']);
 // Route::post('/prodi', [prodicontroller::class, 'store']);
 
 Route::resource('/prodi', prodicontroller::class);
+
+// Route::get('/mahasiswa', 'App\Http\Controllers\mahasiswacontroller@index');
+// Route::get('/mahasiswa', [mahasiswacontroller::class, 'index']);
+// Route::get('/mahasiswa/{id}', [mahasiswacontroller::class, 'show']);
+// Route::get('/mahasiswa/create', [mahasiswacontroller::class, 'create']);
+// Route::post('/mahasiswa', [mahasiswacontroller::class, 'store']);
+
+Route::resource('/mahasiswa', mahasiswacontroller::class);

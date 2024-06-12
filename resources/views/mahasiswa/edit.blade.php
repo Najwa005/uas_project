@@ -32,37 +32,38 @@
                     <!-- jquery validation -->
                     <div class="card card-primary">
                         <div class="card-header">
-                            <h3 class="card-title">Tambah Mahasiswa</h3>
+                            <h3 class="card-title">Edit Mahasiswa</h3>
                         </div>
                         <!-- /.card-header -->
                         <!-- form start -->
-                        <form action="{{ url('mahasiswa') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ url("mahasiswa/$mahasiswa -> nim") }}" method="POST" enctype="multipart/form-data">
+                            @method('put')
                             @csrf
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="nim">NIM</label>
-                                    <input type="text" name="nim" class="form-control" id="nim" placeholder="Masukkan NIM">
+                                    <input type="text" name="nim" class="form-control" id="nim" placeholder="Masukkan NIM" value="{{ $mahasiswa->nim }}" readonly>
                                 </div>
                                 <div class="form-group">
                                     <label for="nama">Nama</label>
-                                    <input type="text" name="nama" class="form-control" id="nama" placeholder="Masukkan Nama">
+                                    <input type="text" name="nama" class="form-control" id="nama" placeholder="Masukkan Nama" value="{{ $mahasiswa->nama }}">
                                 </div>
                                 <div class="form-group">
                                     <label for="prodi">Program Studi</label>
                                     <select class="form-control select2bs4" style="width: 100%;" id="prodi" name="prodi_id">
                                         <option value="">Pilih Prodi</option>
                                         @foreach ($prodi as $d)
-                                        <option value="{{ $d['id'] }}">{{ $d['nama_prodi']}}</option>
+                                        <option value="{{ $d['id'] }}" {{ $d['id'] == $mahasiswa->prodi_id ? 'SELECTED' : '' }}>{{ $d['nama_prodi'] }}</option>
                                         @endforeach
                                     </select>
                                 </div>
                                 <div class="form-group">
                                     <label for="nohp">Nomor HP</label>
-                                    <input type="text" name="no_hp" class="form-control" id="nohp" placeholder="Masukkan Nomor HP">
+                                    <input type="text" name="no_hp" class="form-control" id="nohp" placeholder="Masukkan Nomor HP" value="{{ $mahasiswa->no_hp }}">
                                 </div>
                                 <div class="form-group">
                                     <label for="alamat">Alamat</label>
-                                    <input type="text" name="alamat" class="form-control" id="alamat" placeholder="Masukkan Alamat">
+                                    <input type="text" name="alamat" class="form-control" id="alamat" placeholder="Masukkan Alamat" value="{{ $mahasiswa->alamat }}">
                                 </div>
                                 <div class="form-group">
                                     <label for="foto">Foto</label>

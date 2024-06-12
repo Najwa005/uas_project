@@ -58,13 +58,13 @@
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $m->nim }}</td>
                         <td>{{ $m->nama }}</td>
-                        <td>{{ $m->id_prodi }}</td>
+                        <td>{{ $m->prodi_id }}</td>
                         <td>{{ $m->no_hp }}</td>
                         <td>{{ $m->alamat }}</td>
                         <td> <img src="images/{{ $m->foto }}" width="50px" height="50px" /> </td>
                         <td>
-                          <a href="" class="btn btn-warning">Edit</a>
-                          <a href="" class="btn btn-danger">Hapus</a>
+                          <a href="{{ url("mahasiswa/$m->nim/edit") }}" class="btn btn-primary">Edit</a>
+                          <button class="btn btn-danger" onclick="return confirm('Anda Yakin ingin Menghapus?')">Hapus</button>
                         </td>
                       </tr>
                     @endforeach
