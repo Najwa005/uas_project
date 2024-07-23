@@ -12,15 +12,15 @@ class prodicontroller extends Controller
 {
     public function index()
     {
-        $data = ['nama' => "Najwa Fitriyani", 'foto' =>'najwa.jpg'];
+        $data = ['nama' => "Najwa Fitriyani", 'foto' => 'najwa.jpg'];
         $prodi = Prodi::all();
-        return view('prodi.index', compact(['data', 'prodi']));
-    }
+        return view('admin.prodi.index', compact(['data', 'prodi']));
+    }   
 
     public function create()
     {
-        $data = ['nama' => "Najwa Fitriyani", 'foto' =>'najwa.jpg'];
-        return view('prodi.create', compact(['data']));
+        $data = ['nama' => "Najwa Fitriyani", 'foto' => 'najwa.jpg'];
+        return view('admin.prodi.create', compact(['data']));
     }
 
     public function store(Request $request)
@@ -38,16 +38,16 @@ class prodicontroller extends Controller
         );
         Prodi::create($validateData);
         return redirect('/prodi');
-    }    
+    }
 
     public function edit(String $id)
     {
-        $data = ['nama' => "Najwa Fitriyani", 'foto' =>'najwa.jpg'];
+        $data = ['nama' => "Najwa Fitriyani", 'foto' => 'najwa.jpg'];
         $prodi = Prodi::find($id);
-        return view('prodi.edit', compact(['data','prodi']));
+        return view('admin.prodi.edit', compact(['data', 'prodi']));
     }
 
-    public function update (Request $request, string $id)
+    public function update(Request $request, string $id)
     {
         $validateData = $request->validate(
             [
@@ -72,6 +72,6 @@ class prodicontroller extends Controller
 
     public function welcome()
     {
-        return view ('welcome');
+        return view('welcome');
     }
 };

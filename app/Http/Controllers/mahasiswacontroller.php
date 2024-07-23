@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\MahasiswaCreated;
 use App\Models\Mahasiswa;
 use App\Models\Prodi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class mahasiswacontroller extends Controller
 {
@@ -15,8 +17,14 @@ class mahasiswacontroller extends Controller
     public function index()
     {
         $data = ['nama' => 'Najwa Fitriyani', 'foto' => 'najwa.jpg'];
-        $mahasiswa = Mahasiswa::get();
-        return view('mahasiswa.index', compact(['data', 'mahasiswa']));
+        $mahasiswa = Mahasiswa::with('prodi')->get();
+        return view('admin.mahasiswa.index', compact(['data', 'mahasiswa']));
+    }
+    public function mahasiswaIndex()
+    {
+        $data = ['nama' => 'Najwa Fitriyani', 'foto' => 'najwa.jpg'];
+        $mahasiswa = Mahasiswa::with('prodi')->get();
+        return view('mahasiswa.home', compact(['data', 'mahasiswa']));
     }
 
     /**
@@ -26,7 +34,7 @@ class mahasiswacontroller extends Controller
     {
         $data = ['nama' => 'Najwa Fitriyani', 'foto' => 'najwa.jpg'];
         $prodi = Prodi::all();
-        return view('mahasiswa.create', compact(['data', 'prodi']));
+        return view('admin.mahasiswa.create', compact(['data', 'prodi']));
     }
 
     /**
@@ -37,22 +45,36 @@ class mahasiswacontroller extends Controller
         $validateData = $request->validate(
             [
                 'nim' => 'required|unique:mahasiswa|max:255',
-                'nama' => '',
-                'prodi_id' => '',
-                'no_hp' => '',
-                'alamat' => '',
+                'nama' => 'required|max:255',
+                'prodi_id' => 'required',
+                'no_hp' => 'required|max:255',
+                'alamat' => 'required|max:255',
+                'foto' => 'image|file|max:2048'
             ],
             [
                 'nim.required' => 'NIM harus diisi',
                 'nim.unique' => 'NIM sudah ada',
                 'nim.max' => 'NIM maksimal 255 karakter',
+                'nama.required' => 'Nama harus diisi',
+                'prodi_id.required' => 'Prodi harus diisi',
+                'no_hp.required' => 'No HP harus diisi',
+                'alamat.required' => 'Alamat harus diisi',
+                'foto.image' => 'Silahkan Upload Foto',
+                'foto.max' => 'Ukuran Foto Maksimal 2MB',
             ]
         );
-        $validateData['foto'] = $validateData['nim'] . '.jpg';
+        if ($request->file('foto')) {
+            $validateData['foto'] = $request->file('foto')->store('images');
+        }
         $validateData['password'] = Hash::make($validateData['nim']);
-        Mahasiswa::create($validateData);
+        $mahasiswa = Mahasiswa::create($validateData);
+
+        event(new MahasiswaCreated($mahasiswa));
+
         return redirect('/mahasiswa');
     }
+
+
 
     /**
      * Display the specified resource.
@@ -70,7 +92,7 @@ class mahasiswacontroller extends Controller
         $data = ['nama' => 'Najwa Fitriyani', 'foto' => 'najwa.jpg'];
         $mahasiswa = Mahasiswa::find($id);
         $prodi = Prodi::all();
-        return view('mahasiswa.edit', compact(['data', 'mahasiswa', 'prodi']));
+        return view('admin.mahasiswa.edit', compact(['data', 'mahasiswa', 'prodi']));
     }
 
     /**
@@ -81,19 +103,32 @@ class mahasiswacontroller extends Controller
         $validateData = $request->validate(
             [
                 'nim' => 'required|max:255',
-                'nama' => '',
-                'prodi_id' => '',
-                'no_hp' => '',
-                'alamat' => '',
+                'nama' => 'required|max:255',
+                'prodi_id' => 'required',
+                'no_hp' => 'required|max:255',
+                'alamat' => 'required|max:255',
+                'foto' => 'image|file|max:2048'
             ],
             [
                 'nim.required' => 'NIM harus diisi',
                 'nim.unique' => 'NIM sudah ada',
                 'nim.max' => 'NIM maksimal 255 karakter',
+                'nama.required' => 'Nama harus diisi',
+                'prodi_id.required' => 'Prodi harus diisi',
+                'no_hp.required' => 'No HP harus diisi',
+                'alamat.required' => 'Alamat harus diisi',
+                'foto.image' => 'Silahkan Upload Foto',
+                'foto.max' => 'Ukuran Foto Maksimal 2MB',
             ]
-            );
-        $validateData['foto']= $validateData['nim'] . '.jpg';
-        $validateData['password']= Hash::make($validateData['nim']);
+        );
+        $mahasiswa = Mahasiswa::find($id);
+        if ($request->file('foto')) {
+            if ($mahasiswa->foto) {
+                Storage::delete($mahasiswa->foto);
+            }
+            $validateData['foto'] = $request->file('foto')->store('images');
+        }
+        $validateData['password'] = Hash::make($validateData['nim']);
         Mahasiswa::where('nim', $id)->update($validateData);
         return redirect('/mahasiswa');
     }
@@ -103,6 +138,10 @@ class mahasiswacontroller extends Controller
      */
     public function destroy(string $id)
     {
+        $mahasiswa = Mahasiswa::find($id);
+        if ($mahasiswa->foto) {
+            Storage::delete($mahasiswa->foto);
+        }
         Mahasiswa::destroy($id);
         return redirect('/mahasiswa');
     }

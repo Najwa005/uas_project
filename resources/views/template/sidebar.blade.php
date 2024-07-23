@@ -3,7 +3,7 @@
     <a href="welcome" class="brand-link">
         <img src="{{ asset ('dist/img/logopoliban.png') }}" alt="Logo" class="brand-image img-circle elevation-3"
             style="opacity: .8">
-        <span class="brand-text font-weight-light">Poliban</span>
+        <h3><span class="brand-text font-weight-light">POLIBAN</span></h3>
     </a>
 
     <!-- Sidebar -->
@@ -11,10 +11,10 @@
         <!-- Sidebar user panel (optional) -->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="image">
-                <img src="{{ asset('images/' . $data['foto']) }}" class="img-circle elevation-2" alt="User Image">
+                <img src=" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-                <a href="#" class="d-block">{{ $data['nama'] }}</a>
+                <a href="#" class="d-block"></a>
             </div>
         </div>
 
@@ -47,6 +47,38 @@
                         <i class="nav-icon far fa-image"></i>
                         <p>
                             Data Prodi
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ url('dosen') }}" class="nav-link">
+                        <i class="nav-icon far fa-image"></i>
+                        <p>
+                            Data Dosen
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ url('matkul') }}" class="nav-link">
+                        <i class="nav-icon far fa-image"></i>
+                        <p>
+                            Data Mata Kuliah
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ url('nilai') }}" class="nav-link">
+                        <i class="nav-icon far fa-image"></i>
+                        <p>
+                            Data Nilai
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ url('matkul') }}" class="nav-link">
+                        <i class="nav-icon far fa-image"></i>
+                        <p>
+                            Data Jadwal Mata Kuliah
                         </p>
                     </a>
                 </li>

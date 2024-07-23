@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Mahasiswa extends Model
 {
@@ -12,6 +13,9 @@ class Mahasiswa extends Model
     protected $table = 'mahasiswa';
     protected $primaryKey = 'nim';
     protected $keyType = 'string';
+    public $incrementing = false; // Nonaktifkan incrementing
+    
+
 
     protected $fillable = [
         'nim',
@@ -23,4 +27,17 @@ class Mahasiswa extends Model
         'prodi_id'
     ];
 
+    protected $hidden = [
+        'password', 'remember_token',
+    ];
+
+    public function prodi(): BelongsTo
+    {
+        return $this->belongsTo(Prodi::class);
+    }
+
+    public function getAuthPassword()
+    {
+        return $this->password;
+    }
 }

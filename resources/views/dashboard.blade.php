@@ -34,9 +34,9 @@
                                   <p>Data Mahasiswa</p>
                               </div>
                               <div class="icon">
-                                  <i class="ion ion-bag"></i>
+                                  <i class="ion ion-person"></i>
                               </div>
-                              <a href="{{ url ('mahasiswa') }}" class="small-box-footer">More info <i
+                              <a href="{{ url('mahasiswa') }}" class="small-box-footer">More info <i
                                       class="fas fa-arrow-circle-right"></i></a>
                           </div>
                       </div>
@@ -52,7 +52,7 @@
                               <div class="icon">
                                   <i class="ion ion-stats-bars"></i>
                               </div>
-                              <a href="{{ url ('prodi') }}" class="small-box-footer">More info <i
+                              <a href="{{ url('prodi') }}" class="small-box-footer">More info <i
                                       class="fas fa-arrow-circle-right"></i></a>
                           </div>
                       </div>
@@ -63,12 +63,12 @@
                               <div class="inner">
                                   <h3></h3>
 
-                                  <p>User Registrations</p>
+                                  <p>Data Dosen</p>
                               </div>
                               <div class="icon">
                                   <i class="ion ion-person-add"></i>
                               </div>
-                              <a href="#" class="small-box-footer">More info <i
+                              <a href="{{ url('dosen') }}" class="small-box-footer">More info <i
                                       class="fas fa-arrow-circle-right"></i></a>
                           </div>
                       </div>
@@ -79,12 +79,44 @@
                               <div class="inner">
                                   <h3></h3>
 
-                                  <p>Unique Visitors</p>
+                                  <p>Data Mata Kuliah</p>
                               </div>
                               <div class="icon">
                                   <i class="ion ion-pie-graph"></i>
                               </div>
-                              <a href="#" class="small-box-footer">More info <i
+                              <a href="{{ url('matkul') }}" class="small-box-footer">More info <i
+                                      class="fas fa-arrow-circle-right"></i></a>
+                          </div>
+                      </div>
+                      <!-- ./col -->
+                      <div class="col-lg-3 col-6">
+                          <!-- small box -->
+                          <div class="small-box bg-danger">
+                              <div class="inner">
+                                  <h3></h3>
+
+                                  <p>Data Nilai</p>
+                              </div>
+                              <div class="icon">
+                                  <i class="ion ion-pie-graph"></i>
+                              </div>
+                              <a href="{{ url('nilai') }}" class="small-box-footer">More info <i
+                                      class="fas fa-arrow-circle-right"></i></a>
+                          </div>
+                      </div>
+                      <!-- ./col -->
+                      <div class="col-lg-3 col-6">
+                          <!-- small box -->
+                          <div class="small-box bg-info">
+                              <div class="inner">
+                                  <h3></h3>
+
+                                  <p>Data Jadwal Mata Kuliah</p>
+                              </div>
+                              <div class="icon">
+                                  <i class="ion ion-person"></i>
+                              </div>
+                              <a href="{{ url('jadwal') }}" class="small-box-footer">More info <i
                                       class="fas fa-arrow-circle-right"></i></a>
                           </div>
                       </div>
