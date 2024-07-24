@@ -28,9 +28,8 @@ Route::get('/dosen', [DosenController::class, 'index'])->middleware('auth');
 Route::resource('/dosen', DosenController::class)->except('index')->middleware('auth');
 
 
-
 Route::resource('/jadwal', JadwalController::class)->except('index')->middleware('auth');
-
+Route::get('/jadwal', [JadwalController::class, 'index'])->middleware('auth');
 
 Route::get('/matkul', [MataKuliahController::class, 'index'])->middleware('auth');
 
